@@ -76,12 +76,12 @@ public class aStar {
       contLoop = loop();
     }
     cell trail = end;
-    while (trail.getParent().getG() != 0) {
+    while (trail.getG() != 0) {
       if (trail.getType() == ' ') {
         trail.setType('*');
       }
       trail = trail.getParent();
-      printMaze();
+      // printMaze();
     }
   }
 
@@ -112,25 +112,25 @@ public class aStar {
       return false;
     }
     if (lowH.getRow() - 1 > 0) {
-      if (maze[lowH.getRow() - 1][lowH.getCol()].getType() != '#') {
+      if (maze[lowH.getRow() - 1][lowH.getCol()].getType() != '#' && !closed.contains(maze[lowH.getRow() - 1][lowH.getCol()])) {
         open.add(maze[lowH.getRow() - 1][lowH.getCol()]);
         maze[lowH.getRow() - 1][lowH.getCol()].setup(hCostCalc(maze[lowH.getRow() - 1][lowH.getCol()]), lowH);
       }
     }
     if (lowH.getRow() + 1 < maze.length) {
-      if (maze[lowH.getRow() + 1][lowH.getCol()].getType() != '#') {
+      if (maze[lowH.getRow() + 1][lowH.getCol()].getType() != '#' && !closed.contains(maze[lowH.getRow() + 1][lowH.getCol()])) {
         open.add(maze[lowH.getRow() + 1][lowH.getCol()]);
         maze[lowH.getRow() + 1][lowH.getCol()].setup(hCostCalc(maze[lowH.getRow() + 1][lowH.getCol()]), lowH);
       }
     }
     if (lowH.getCol() - 1 > 0) {
-      if (maze[lowH.getRow()][lowH.getCol() - 1].getType() != '#') {
+      if (maze[lowH.getRow()][lowH.getCol() - 1].getType() != '#' && !closed.contains(maze[lowH.getRow()][lowH.getCol() - 1])) {
         open.add(maze[lowH.getRow()][lowH.getCol() - 1]);
         maze[lowH.getRow()][lowH.getCol() - 1].setup(hCostCalc(maze[lowH.getRow()][lowH.getCol() - 1]), lowH);
       }
     }
     if (lowH.getCol() + 1 > 0) {
-      if (maze[lowH.getRow()][lowH.getCol() + 1].getType() != '#') {
+      if (maze[lowH.getRow()][lowH.getCol() + 1].getType() != '#' && !closed.contains(maze[lowH.getRow()][lowH.getCol() + 1])) {
         open.add(maze[lowH.getRow()][lowH.getCol() + 1]);
         maze[lowH.getRow()][lowH.getCol() + 1].setup(hCostCalc(maze[lowH.getRow()][lowH.getCol() + 1]), lowH);
       }
