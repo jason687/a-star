@@ -81,8 +81,12 @@ public class aStar {
         trail.setType('*');
       }
       trail = trail.getParent();
-      // printMaze();
+      //printMaze();
+      // System.out.print(Text.CLEAR_SCREEN);
+      Text.wait(100);
+      System.out.println(toStringColor());
     }
+
   }
 
   public boolean loop () {
@@ -157,13 +161,31 @@ public class aStar {
     }
   }
 
+  public String toStringColor () {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < maze.length; i++) {
+      for (int c = 0; c < maze[i].length; c++) {
+        if(maze[i][c].getType()==' ')
+          builder.append(" ");
+        else if(maze[i][c].getType()=='#')
+          builder.append(Text.color(Text.DARK)+"#");
+        else if(maze[i][c].getType()=='E')
+          builder.append(Text.color(Text.GREEN)+"E");
+        else if(maze[i][c].getType()=='S')
+          builder.append(Text.color(Text.RED)+"S");
+        else if(maze[i][c].getType()=='*')
+          builder.append(Text.color(Text.CYAN)+'*');
+      }
+      builder.append("\n"+Text.RESET);
+    }
+    return builder.toString()+"\n";
+  }
+
   public static void main (String[] args) {
     aStar a = new aStar();
     try {
       a.scanText(args[0]);
-      a.printMaze();
       a.algo();
-      a.printMaze();
     }
     catch (FileNotFoundException err) {
       System.out.println("stop being bad");
